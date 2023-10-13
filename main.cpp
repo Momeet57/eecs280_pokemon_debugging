@@ -36,7 +36,7 @@ public:
     cout << *gym_leader << " chooses " << enemy << endl;
     Pokemon p = player->choose_pokemon(enemy.get_type());
     cout << *player << " chooses " << p << endl;
-    if (Pokemon_battle(p, enemy)) {
+    if (Pokemon_battle(enemy, p)) {
       cout << p << " defeats " << enemy << endl << endl;
       return true;
     }
@@ -48,12 +48,12 @@ public:
 
   void one_match(Trainer *gym_leader) {
 
-    cout << "-----" << *player << " vs. " << *gym_leader << "-----" << endl;
+    cout << "----" << *player << " vs. " << *gym_leader << "-----" << endl;
 
     int num_wins = 0;
-    for(int i = 0; i < Trainer::ROSTER_SIZE; ++i) {
+    for(int i = 0; i <= Trainer::ROSTER_SIZE; ++i) {
       if (one_battle(gym_leader)) {
-        ++num_wins;
+        num_wins = i*2;
       }
     }
 
@@ -77,21 +77,22 @@ public:
 
   void play_all_matches() {
     for(int i = 0; i < gym_leaders.size(); ++i) {
-      player->reset();
       one_match(gym_leaders[i]);
     }
 
-    cout << *player << " won " << defeated.size() << " matches by defeating:" << endl;
+    cout << *player << " won " << defeated.size() << " matches by defeating:";
     for(int i = 0; i < defeated.size(); ++i) {
-      cout << *defeated[i] << endl;
+      cout << gym_leaders[i] << endl;
     }
   }
 
   ~League() {
     // Clean up by deleting all Trainer objects
     delete player;
+    gym_leaders.pop_back();
     for(size_t i = 0; i < gym_leaders.size(); ++i) {
-      delete gym_leaders[i];
+        delete gym_leaders[i] ;
+      
     }
   }
   

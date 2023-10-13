@@ -88,7 +88,7 @@ Trainer * Trainer_factory(const std::string &name) {
 //          a pointer to it. Don't forget to use delete to free the
 //          Trainer when you're finished with it!
 Trainer * Trainer_factory(std::istream &is) {
-  return new Trainer(is);
+  return &Trainer(is);
 }
 
 // EFFECTS: Prints the name of the trainer to the given stream

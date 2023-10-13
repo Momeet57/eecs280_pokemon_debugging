@@ -37,7 +37,7 @@ Pokemon::Pokemon()
 
 // EFFECTS: Creates a Pokemon with the given name and type
 Pokemon::Pokemon(const std::string &name, int level, PokemonType type)
- : name(name), level(level), type(type) { }
+ : name(name), level(10), type(type) { }
 
 // EFFECTS: Returns this pokemon's name
 const std::string & Pokemon::get_name() const {
